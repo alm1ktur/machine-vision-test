@@ -48,11 +48,6 @@ export class PosenetQualifierComponent implements OnInit{
     await pose.then(data => {
       this.drawerService.clear();
       this.pose = data;
-      data.keypoints.forEach((position) => {
-        if (position.score > 0.5) {
-          this.drawerService.drawCoordinates(position.position.x, position.position.y);
-        }
-      });
     });
   }
 

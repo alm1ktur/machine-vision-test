@@ -30,6 +30,7 @@ export class MachineVisionComponent {
   }
 
   findHeart(): void {
+    this.drawerService.clear();
     this.machineVision.projectHeartPoints(defaultPatient);
     this.drawerService.drawCoordinates(this.machineVision.person.heart_points[1][0],
       this.machineVision.person.heart_points[1][1],
@@ -38,11 +39,13 @@ export class MachineVisionComponent {
   }
 
   findSternum(): void {
+    this.drawerService.clear();
     this.machineVision.projectSternum();
     this.drawerService.drawCoordinates(this.machineVision.person.sternum[0], this.machineVision.person.sternum[1], `#ffffff`);
   }
 
   findChin(): void {
+    this.drawerService.clear();
     this.drawerService.drawCoordinates(this.machineVision.projectChin()[0], this.machineVision.projectChin()[1], `#ffffff`);
   }
 }
