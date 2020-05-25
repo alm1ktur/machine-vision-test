@@ -1,6 +1,6 @@
 import { PatientI, PersonDictionary, PersonI } from './person.static';
 import { CocoPart } from './coco-part.enum';
-import { defaultMachineVision } from './machine-vision-default-value.static';
+import { defaultMachineVision, NameProjectOrgans } from './machine-vision-default-value.static';
 
 export class MachineVision {
   public person: PersonI = defaultMachineVision;
@@ -173,7 +173,6 @@ export class MachineVision {
       B[index] = part.reduce((a, b) => a + b, 0);
       B[index] *= coordinateScales[index] * this.shoulderDist() / 0.15;
     });
-    console.log('B', B);
     let [rX, rY] = B;
     if (alphaX < 0) {
       rX *= -1;
@@ -219,8 +218,8 @@ export class MachineVision {
       const normal = [shoulderDy, -shoulderDx];
       const normalLength = Math.sqrt(normal[0] ** 2 + normal[1] ** 2);
       if (normalLength !== 0) {
-        this.person.navel = [((this.shoulderDist() * normal[0]) / normalLength) + this.person.sternum[0],
-          ((this.shoulderDist() * normal[1]) / normalLength) + this.person.sternum[1]];
+        this.person.navel = [[((this.shoulderDist() * normal[0]) / normalLength) + this.person.sternum[0],
+          ((this.shoulderDist() * normal[1]) / normalLength) + this.person.sternum[1]]];
       } else {
         this.person.navel = null;
       }
@@ -332,18 +331,17 @@ export class MachineVision {
     });
   }
 
-  projectChin(): number[] {
+  projectChin(): void {
     if (this.person.shoulders[this.LEFT] && this.person.shoulders[this.RIGHT]) {
       const shoulderMidX = Number((this.person.shoulders[this.RIGHT][0] + this.person.shoulders[this.LEFT][0]) / 2);
       const shoulderMidY = Number((this.person.shoulders[this.RIGHT][1] + this.person.shoulders[this.LEFT][1]) / 2);
-      return [Number((shoulderMidX + this.person.nose[0]) / 2), Number((shoulderMidY + this.person.nose[1]) / 2)];
+      this.person.chin = [[Number((shoulderMidX + this.person.nose[0]) / 2), Number((shoulderMidY + this.person.nose[1]) / 2)]];
     } else if (this.person.eyes[this.LEFT] && this.person.eyes[this.RIGHT]) {
       const eyeMidX = Number((this.person.eyes[this.LEFT][0] + this.person.eyes[this.RIGHT][0]) / 2);
       const eyeMidY = Number((this.person.eyes[this.LEFT][1] + this.person.eyes[this.RIGHT][1]) / 2);
       const noseToEyesY = 2 * (this.person.nose[1] - eyeMidY);
-      return [eyeMidX, Number(this.person.nose[1] + noseToEyesY)];
+      this.person.chin = [[eyeMidX, Number(this.person.nose[1] + noseToEyesY)]];
     }
-    return null;
   }
 
   near(p, q, tolerance = 0.2, manhattanDist = false) {

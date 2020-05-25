@@ -7,7 +7,7 @@ export enum StateEnum {
 
 export const StateToMessage = [
   'Finding device',
-  'Finding your body, please stay in front of camera',
+  'Choose organ which you want',
   'Please hover over the indicated area',
   'Measuring'
 ];

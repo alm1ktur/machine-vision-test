@@ -17,6 +17,7 @@ export const defaultMachineVision: PersonI = {
   palpation_points: null,
   sternum: null,
   navel: null,
+  chin: null,
   distance_to_center: null,
   triangle_area: null,
   shoulder_length: null,
@@ -51,3 +52,13 @@ export const convertImageToKey = [
   'ankles',
 ];
 
+export type NameProjectOrgans = 'Navel' | 'LungPoints' | 'AbdomenPoints' | 'Chin' | 'Sternum' | 'HeartPoints';
+
+export enum NameToFieldOrgans {
+  'Navel' = 'navel',
+  'LungPoints' = 'lung_points',
+  'AbdomenPoints' = 'abdomen_points',
+  'Chin' = 'chin',
+  'Sternum' = 'sternum',
+  'HeartPoints' = 'heart_points'
+}

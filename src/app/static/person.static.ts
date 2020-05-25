@@ -14,6 +14,7 @@ export interface PersonI {
   eyes: number[][];
   ears: number[][];
   shoulders: number[][];
+  chin: number[][];
   elbows: number[][];
   wrists: number[][];
   hips: number[][];
@@ -26,7 +27,7 @@ export interface PersonI {
   abdomen_points: number[][];
   palpation_points: number[][];
   sternum: number[];
-  navel: number[];
+  navel: number[][];
   // ??????
   distance_to_center: number;
   triangle_area: number;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { defaultDictionary, PersonDictionary } from '../static/person.static';
 import { Pose } from '@tensorflow-models/posenet';
-import { convertImageToKey } from '../static/machine-vision-default-value.static';
+import { convertImageToKey, NameProjectOrgans } from '../static/machine-vision-default-value.static';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -9,6 +9,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class MachineVisionService {
   private $posenetCoords: BehaviorSubject<PersonDictionary> = new BehaviorSubject<PersonDictionary>(null);
+  public nameOrgan: NameProjectOrgans = null;
+
   constructor() { }
 
   get posenetCoords(): PersonDictionary {
